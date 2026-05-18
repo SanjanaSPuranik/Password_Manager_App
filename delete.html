@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Password</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Delete Password</h2>
+
+        <input type="text" id="site" placeholder="Website">
+
+        <button onclick="deletePassword()">
+            Delete
+        </button>
+
+        <button onclick="window.location.href='dashboard.html'">
+            Back
+        </button>
+
+    </div>
+
+    <script>
+
+    async function deletePassword() {
+
+        const site =
+            document.getElementById("site").value;
+
+        if (!site) {
+
+            alert("Enter website name");
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                `http://127.0.0.1:5000/delete/${site}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            const data = await response.json();
+
+            alert(data.message);
+
+        }
+
+        catch (error) {
+
+            alert("Server Error");
+        }
+    }
+
+</script>
+</body>
+
+</html>

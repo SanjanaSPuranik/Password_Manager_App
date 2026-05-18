@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Password</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Search Password</h2>
+
+        <input type="text" id="site" placeholder="Website">
+
+        <button onclick="searchPassword()">
+            Search
+        </button>
+
+        <button onclick="window.location.href='dashboard.html'">
+            Back
+        </button>
+
+    </div>
+
+    <script>
+
+        async function searchPassword() {
+
+            const site = document.getElementById("site").value;
+
+            const response = await fetch(
+                `http://127.0.0.1:5000/view/${site}`
+            );
+
+            const data = await response.json();
+
+            if (data.username) {
+
+                alert(
+                    "Username: " + data.username +
+                    "\nPassword: " + data.password
+                );
+
+            } else {
+
+                alert("Password not found");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
